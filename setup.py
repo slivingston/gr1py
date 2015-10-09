@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from distutils.core import setup
+from setuptools import setup
 
 
 # Version
@@ -25,6 +25,6 @@ setup(name='gr1py',
       author_email='slivingston@cds.caltech.edu',
       packages=['gr1py', 'gr1py.form'],
       package_data={'gr1py.form': ['parsetab.py']},
-      requires=['ply', 'networkx'],
-      scripts=['scripts/gr1py']
+      install_requires=['ply', 'networkx'],
+      entry_points={'console_scripts': ['gr1py = gr1py.cli:main']}
       )
