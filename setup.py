@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 from setuptools import setup
 
 
@@ -14,10 +15,14 @@ with open('gr1py/_version.py', 'w') as f:
 version = '{version}'""".format(version=gr1py_version))
 
 # Build parsing tables
-import gr1py.form.gr1c
-import os.path
-assert os.path.exists('gr1py/form/parsetab.py'), 'Failed to build parsing table.'
-
+try:
+    import gr1py.form.gr1c
+    import os.path
+    assert os.path.exists('gr1py/form/parsetab.py'), 'Failed to build parsing table.'
+except ImportError:
+    print('!'*60)
+    print('Please run again to cache the parsing table.')
+    print('!'*60)
 
 setup(name='gr1py',
       version=gr1py_version,
