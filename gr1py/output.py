@@ -39,7 +39,7 @@ def dump_json(symtab, strategy):
         outs += '\t"trans": '+json.dumps([str(next_nd) for next_nd
                                           in strategy.successors_iter(nd)])
         outs += ' }\n'
-        
+
     return outs+'}}'
 
 def dump_gr1caut(symtab, strategy):
