@@ -304,4 +304,6 @@ def p_tpropformula(p):
 import ply.yacc as yacc
 from os.path import dirname
 PWD = dirname(__file__)
-parse = yacc.yacc(tabmodule='gr1py.form.parsetab', outputdir=PWD).parse
+lexer = lex.lex()
+parser = yacc.yacc(tabmodule='gr1py.form.parsetab', outputdir=PWD)
+parse = lambda x: parser.parse(x, lexer=lexer)
