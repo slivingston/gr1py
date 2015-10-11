@@ -13,6 +13,15 @@ Input formats
 The default input format is that of [gr1c](http://scottman.net/2012/gr1c).
 
 
+Output formats
+--------------
+
+These are selected from the command-line using the `-t` switch. Each corresponds
+to a function in `gr1py.output`.
+
+* `json` : [gr1c JSON](http://slivingston.github.io/gr1c/md_formats.html#gr1cjson)
+
+
 License
 -------
 
