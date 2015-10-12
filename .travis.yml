@@ -5,4 +5,4 @@ python:
 install:
   - pip install .
 
-script: nosetests -v
+script: cd tests && nosetests -v
