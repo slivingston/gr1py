@@ -142,22 +142,48 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                 break
             j += 1
         if j == 0:
+            assert goalnames[strategy.node[nd]['mode']] in tsys.G.node[strategy.node[nd]['state']]['sat']
             original_mode = strategy.node[nd]['mode']
             while goalnames[strategy.node[nd]['mode']] in tsys.G.node[strategy.node[nd]['state']]['sat']:
                 strategy.node[nd]['mode'] = (strategy.node[nd]['mode'] + 1) % tsys.num_sgoals
                 if strategy.node[nd]['mode'] == original_mode:
                     break
+            if strategy.node[nd]['mode'] != original_mode:
+                repeat_found = False
+                for possible_repeat, attr in strategy.nodes_iter(data=True):
+                    if (possible_repeat != nd
+                        and attr['mode'] == strategy.node[nd]['mode']
+                        and attr['state'] == strategy.node[nd]['state']):
+                        repeat_found = True
+                        for (u,v) in strategy.in_edges_iter(nd):
+                            strategy.add_edge(u, possible_repeat)
+                        strategy.remove_edges_from(strategy.in_edges(nd))
+                        strategy.remove_node(nd)
+                        break
+                if repeat_found:
+                    continue
+
+            j = 0
+            while j < len(Y_list[strategy.node[nd]['mode']]):
+                if strategy.node[nd]['state'] in Y_list[strategy.node[nd]['mode']][j]:
+                    break
+                j += 1
+            if j == 0:
+                assert goalnames[strategy.node[nd]['mode']] in tsys.G.node[strategy.node[nd]['state']]['sat']
 
         for envpost in tsys.envtrans[strategy.node[nd]['state']]:
             next_state = None
             for succ_nd in tsys.G.successors(strategy.node[nd]['state']):
                 if (tuple([succ_nd[i] for i in tsys.ind_uncontrolled]) == envpost
                     and ((j > 0 and succ_nd in Y_list[strategy.node[nd]['mode']][j-1])
-                         or (j == 0 and succ_nd in Y_list[strategy.node[nd]['mode']][j]))):
+                         or (j == 0 and succ_nd in W))):
                     next_state = succ_nd
                     break
 
             if next_state is None:
+                assert j > 0
+                if j == 0:
+                    import pdb; pdb.set_trace()
                 blocking_index = None
                 blocking_sets = X_list[strategy.node[nd]['mode']][j-1]
                 for k in range(len(blocking_sets)):
@@ -179,32 +205,16 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                     foundmatch = True
                     break
             if not foundmatch:
-                new_mode = strategy.node[nd]['mode']
-                j = 0
-                while j < len(Y_list[new_mode]):
-                    if next_state in Y_list[new_mode][j]:
-                        break
-                    j += 1
-
                 if j == 0:
-                    original_mode = new_mode
-                    while goalnames[new_mode] in tsys.G.node[next_state]['sat']:
-                        new_mode = (new_mode + 1) % tsys.num_sgoals
-                        if new_mode == original_mode:
-                            break
-                    foundmatch = False
-                    for candidate, cattr in strategy.nodes_iter(data=True):
-                        if (cattr['state'] == next_state and cattr['mode'] == new_mode):
-                            strategy.add_edge(nd, candidate)
-                            foundmatch = True
-                            break
+                    new_mode = (strategy.node[nd]['mode'] + 1) % tsys.num_sgoals
+                else:
+                    new_mode = strategy.node[nd]['mode']
 
-                if j >= 1 or not foundmatch:
-                    workset.append(next_id)
-                    strategy.add_node(next_id, {'state': next_state,
-                                                'mode': new_mode,
-                                                'initial': False})
-                    strategy.add_edge(nd, next_id)
-                    next_id += 1
+                workset.append(next_id)
+                strategy.add_node(next_id, {'state': next_state,
+                                            'mode': new_mode,
+                                            'initial': False})
+                strategy.add_edge(nd, next_id)
+                next_id += 1
 
     return strategy
