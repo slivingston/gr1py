@@ -4,9 +4,34 @@ gr1py
 **gr1py** is an enumerative (or concrete) reactive synthesis tool for the GR(1)
 fragment of LTL. It is pure Python.
 
-Scott C. Livingston  <slivingston@cds.caltech.edu>
+
+Installation
+------------
 
 [![Build Status](https://travis-ci.org/slivingston/gr1py.svg?branch=master)](https://travis-ci.org/slivingston/gr1py)
+
+Releases are available from the [Python Package Index](https://pypi.python.org/pypi).
+To get it from there and check the version, try
+
+    pip install gr1py
+    gr1py -V
+
+[pip](https://pip.pypa.io) should get dependencies for you if you do not have
+them. They are
+
+* [PLY](http://www.dabeaz.com/ply/)
+* [NetworkX](http://networkx.lanl.gov)
+
+If you want to hack on gr1py, clone the repository from
+https://github.com/slivingston/gr1py.git
+
+
+Feedback and contributing
+-------------------------
+
+Bug reports, feature requests, and comments can be submitted via the
+[project issue tracker](https://github.com/slivingston/gr1py/issues) or via
+email to the authors.
 
 
 Input formats
@@ -23,6 +48,12 @@ to a function in `gr1py.output`.
 
 * `json` : [gr1c JSON](http://slivingston.github.io/gr1c/md_formats.html#gr1cjson)
 * `dot` : [Graphviz dot](http://www.graphviz.org)
+
+
+Authors
+-------
+
+Scott C. Livingston  <slivingston@cds.caltech.edu>
 
 
 License
