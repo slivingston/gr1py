@@ -26,14 +26,6 @@ If you want to hack on gr1py, clone the repository from
 https://github.com/slivingston/gr1py.git
 
 
-Feedback and contributing
--------------------------
-
-Bug reports, feature requests, and comments can be submitted via the
-[project issue tracker](https://github.com/slivingston/gr1py/issues) or via
-email to the authors.
-
-
 Input formats
 -------------
 
@@ -48,6 +40,14 @@ to a function in `gr1py.output`.
 
 * `json` : [gr1c JSON](http://slivingston.github.io/gr1c/md_formats.html#gr1cjson)
 * `dot` : [Graphviz dot](http://www.graphviz.org)
+
+
+Feedback and contributing
+-------------------------
+
+Bug reports, feature requests, and comments can be submitted via the
+[project issue tracker](https://github.com/slivingston/gr1py/issues) or via
+email to the authors.
 
 
 Authors
