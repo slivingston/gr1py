@@ -6,7 +6,7 @@ from setuptools import setup
 # Version
 MAJOR = 0
 MINOR = 0
-MICRO = 3
+MICRO = 4
 
 gr1py_version = '{major}.{minor}.{micro}'.format(major=MAJOR, minor=MINOR, micro=MICRO)
 
