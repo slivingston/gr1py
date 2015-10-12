@@ -43,12 +43,13 @@ def dump_json(symtab, strategy):
     return outs+'}}'
 
 def dump_gr1caut(symtab, strategy):
+    node_mapping = dict(zip(strategy.nodes_iter(), range(strategy.number_of_nodes())))
     outs = '1\n'  # version 1
     for nd, attr in strategy.nodes_iter(data=True):
-        outs += str(nd)+' ' + ' '.join([str(val) for val in attr['state']])
+        outs += str(node_mapping[nd])+' ' + ' '.join([str(val) for val in attr['state']])
         outs += ' ' + str(1 if attr['initial'] else 0)
         outs += ' ' + str(attr['mode'])
         outs += ' -1'  # rgrad not implemented yet
-        outs += ' ' + ' '.join([str(next_nd) for next_nd in strategy.successors(nd)])
+        outs += ' ' + ' '.join([str(node_mapping[next_nd]) for next_nd in strategy.successors(nd)])
         outs += '\n'
     return outs
