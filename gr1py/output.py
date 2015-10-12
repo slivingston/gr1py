@@ -53,3 +53,20 @@ def dump_gr1caut(symtab, strategy):
         outs += ' ' + ' '.join([str(node_mapping[next_nd]) for next_nd in strategy.successors(nd)])
         outs += '\n'
     return outs
+
+def dump_dot(symtab, strategy):
+    idt = 4*' '
+    outs = '/* created using gr1py, version {v} */\n'.format(v=__version__)
+    outs += 'digraph A {\n'+idt+'"" [shape=none]\n'
+    node_strings = dict()
+    for nd, attr in strategy.nodes_iter(data=True):
+        node_strings[nd] = ('"'+str(nd)+';\\n'
+                            +', '.join([sym['name']+'='+str(attr['state'][i])
+                                       for (i,sym) in enumerate(symtab)])
+                            +'"')
+        outs += idt+node_strings[nd]+'\n'
+        if attr['initial']:
+            outs += '"" -> '+idt+node_strings[nd]+'\n'
+    for (u, v) in strategy.edges_iter():
+        outs += idt+node_strings[u]+' -> '+node_strings[v]+'\n'
+    return outs+'}'

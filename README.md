@@ -20,6 +20,7 @@ These are selected from the command-line using the `-t` switch. Each corresponds
 to a function in `gr1py.output`.
 
 * `json` : [gr1c JSON](http://slivingston.github.io/gr1c/md_formats.html#gr1cjson)
+* `dot` : [Graphviz dot](http://www.graphviz.org)
 
 
 License

@@ -37,7 +37,7 @@ def main(args=None):
     parser.add_argument('-t', metavar='TYPE', action='store',
                         dest='output_format', default='json',
                         help=('strategy output format; default is "json"; '
-                              'supported formats: json, gr1caut'))
+                              'supported formats: json, gr1caut, dot'))
 
     if args is None:
         args = parser.parse_args()
@@ -49,7 +49,7 @@ def main(args=None):
         return 0
 
     args.output_format = args.output_format.lower()
-    if args.output_format not in ['json', 'gr1caut']:
+    if args.output_format not in ['json', 'gr1caut', 'dot']:
         print('Unrecognized output format, "'+str(args.output_format)+'". Try "-h".')
         return 1
 
@@ -79,6 +79,8 @@ def main(args=None):
                 print(output.dump_json(tsys.symtab, strategy))
             elif args.output_format == 'gr1caut':
                 print(output.dump_gr1caut(tsys.symtab, strategy))
+            elif args.output_format == 'dot':
+                print(output.dump_dot(tsys.symtab, strategy))
             else:
                 raise ValueError('Unrecognized output format, "'+str(args.output_format)+'"')
                 return 1
