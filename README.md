@@ -6,6 +6,8 @@ fragment of LTL. It is pure Python.
 
 Scott C. Livingston  <slivingston@cds.caltech.edu>
 
+[![Build Status](https://travis-ci.org/slivingston/gr1py.svg?branch=master)](https://travis-ci.org/slivingston/gr1py)
+
 
 Input formats
 -------------
