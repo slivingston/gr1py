@@ -8,8 +8,6 @@ fragment of LTL. It is pure Python.
 Installation
 ------------
 
-[![Build Status](https://travis-ci.org/slivingston/gr1py.svg?branch=master)](https://travis-ci.org/slivingston/gr1py)
-
 Releases are available from the `Python Package Index
 <https://pypi.python.org/pypi>`_ at https://pypi.python.org/pypi/gr1py
 To get it from there and check the version, try ::
@@ -17,7 +15,7 @@ To get it from there and check the version, try ::
   pip install gr1py
   gr1py -V
 
-[pip](https://pip.pypa.io) should get dependencies for you if you do not have
+`pip <https://pip.pypa.io>`_ should get dependencies for you if you do not have
 them. They are
 
 * PLY (http://www.dabeaz.com/ply/)
@@ -25,6 +23,11 @@ them. They are
 
 If you want to hack on gr1py, clone the repository from
 https://github.com/slivingston/gr1py.git
+
+Current `CI server report <https://travis-ci.org/slivingston/gr1py>`_:
+
+.. image:: https://travis-ci.org/slivingston/gr1py.svg?branch=master
+   :alt: build status from Travis CI
 
 
 Input formats
