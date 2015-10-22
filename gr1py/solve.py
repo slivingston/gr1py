@@ -1,7 +1,11 @@
 """Solve various problems concerning the formula
 """
 import copy
-import networkx as nx
+
+try:
+    from networkx import DiGraph
+except ImportError:
+    from minnx import DiGraph
 
 from .tstruct import stategen
 
@@ -12,7 +16,7 @@ def forallexists_pre(tsys, A):
         for pre_s in tsys.G.predecessors_iter(s):
             for envpost in tsys.envtrans[pre_s]:
                 canreach = False
-                for post_pre_s in tsys.G.successors(pre_s):
+                for post_pre_s in tsys.G.successors_iter(pre_s):
                     if tuple([post_pre_s[i] for i in tsys.ind_uncontrolled]) != envpost:
                         continue
                     if post_pre_s in A:
@@ -128,7 +132,7 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
     for goalmode in range(tsys.num_sgoals):
         Y_list[goalmode][0] = set([s for s in W if goalnames[goalmode] in tsys.G.node[s]['sat']])
 
-    strategy = nx.DiGraph()
+    strategy = DiGraph()
     next_id = len(initial_states)
     workset = range(next_id)
     strategy.add_nodes_from([(i, {'state': s, 'mode': 0, 'initial': True})

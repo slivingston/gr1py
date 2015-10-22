@@ -33,6 +33,6 @@ setup(name='gr1py',
       description='enumerative (or concrete) reactive synthesis tool for the GR(1) fragment of LTL',
       packages=['gr1py', 'gr1py.form'],
       package_data={'gr1py.form': ['parsetab.py']},
-      install_requires=['ply', 'networkx'],
+      install_requires=['ply'],
       entry_points={'console_scripts': ['gr1py = gr1py.cli:main']}
       )

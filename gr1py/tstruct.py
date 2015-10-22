@@ -1,7 +1,11 @@
 """Temporal structures, e.g., transition system and game arena
 """
 import itertools
-import networkx as nx
+
+try:
+    from networkx import DiGraph
+except ImportError:
+    from minnx import DiGraph
 
 
 def stategen(symtab):
@@ -47,7 +51,7 @@ def ts_from_expr(symtab, exprtab):
             if eval(systrans_formula, evalglobals, stated):
                 systrans.append((state, next_state))
 
-    G = nx.DiGraph()
+    G = DiGraph()
     G.add_edges_from(systrans)
     for nd in G.nodes_iter():
         G.node[nd]['sat'] = list()
