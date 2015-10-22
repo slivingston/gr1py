@@ -1,11 +1,12 @@
 """Solve various problems concerning the formula
 """
+from __future__ import absolute_import
 import copy
 
 try:
     from networkx import DiGraph
 except ImportError:
-    from minnx import DiGraph
+    from .minnx import DiGraph
 
 from .tstruct import stategen
 
@@ -134,7 +135,7 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
 
     strategy = DiGraph()
     next_id = len(initial_states)
-    workset = range(next_id)
+    workset = list(range(next_id))
     strategy.add_nodes_from([(i, {'state': s, 'mode': 0, 'initial': True})
                              for (i,s) in enumerate(initial_states)])
     while len(workset) > 0:

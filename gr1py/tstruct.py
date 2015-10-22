@@ -1,20 +1,21 @@
 """Temporal structures, e.g., transition system and game arena
 """
+from __future__ import absolute_import
 import itertools
 
 try:
     from networkx import DiGraph
 except ImportError:
-    from minnx import DiGraph
+    from .minnx import DiGraph
 
 
 def stategen(symtab):
     statestab = []
     for v in symtab:
         if v['type'] == 'boolean':
-            statestab.append(xrange(2))
+            statestab.append(range(2))
         elif v['type'] == 'int':
-            statestab.append(xrange(v['domain'][0], v['domain'][1]+1))
+            statestab.append(range(v['domain'][0], v['domain'][1]+1))
         else:
             raise TypeError('Unrecognized type "'+str(v['type'])
                             +'" of variable "'+str(v['name'])+'"')
