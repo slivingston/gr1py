@@ -19,7 +19,9 @@ To get it from there and check the version, try ::
 them. They are
 
 * PLY (http://www.dabeaz.com/ply/)
-* NetworkX (http://networkx.lanl.gov)
+
+If it is available, NetworkX (http://networkx.lanl.gov) will be used. Otherwise,
+a simple built-in class for directed graphs will be used.
 
 If you want to hack on gr1py, clone the repository from
 https://github.com/slivingston/gr1py.git
