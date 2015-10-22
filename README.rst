@@ -20,8 +20,9 @@ them. They are
 
 * PLY (http://www.dabeaz.com/ply/)
 
-If it is available, NetworkX (http://networkx.lanl.gov) will be used. Otherwise,
-a simple built-in class for directed graphs will be used.
+If it is available, NetworkX (http://networkx.lanl.gov) will be used.  However,
+it is not required.  A simple built-in class for directed graphs will be used
+if NetworkX is not found.
 
 If you want to hack on gr1py, clone the repository from
 https://github.com/slivingston/gr1py.git
@@ -41,7 +42,7 @@ The default input format is that of gr1c (http://scottman.net/2012/gr1c).
 Output formats
 --------------
 
-These are selected from the command-line using the ``-t`` switch. Each
+These are selected from the command-line using the ``-t`` switch.  Each
 corresponds to a function in ``gr1py.output``.
 
 * ``json`` : `gr1c JSON <http://slivingston.github.io/gr1c/md_formats.html#gr1cjson>`_
