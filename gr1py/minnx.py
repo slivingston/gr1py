@@ -59,13 +59,13 @@ class DiGraph(object):
             self.add_node(*nodetuple)
 
     def add_edge(self, x, y, attr=None):
-        if not self.node.has_key(x):
+        if x not in self.node:
             self.add_node(x)
-        if not self.node.has_key(y):
+        if y not in self.node:
             self.add_node(y)
-        if not self.edge.has_key(x):
+        if x not in self.edge:
             self.edge[x] = {y: dict()}
-        if not self.edge[x].has_key(y):
+        if y not in self.edge[x]:
             if attr is None:
                 self.edge[x][y] = dict()
             else:
@@ -79,7 +79,7 @@ class DiGraph(object):
             self.add_edge(*edgetuple)
 
     def has_edge(self, x, y):
-        if self.edge.has_key(x) and self.edge[x].has_key(y):
+        if x in self.edge and y in self.edge[x]:
             return True
         else:
             return False
@@ -126,16 +126,16 @@ class DiGraph(object):
         return [e for e in self.in_edges_iter(x)]
 
     def remove_node(self, x):
-        if self.node.has_key(x):
+        if x in self.node:
             del self.node[x]
-        if self.edge.has_key(x):
+        if x in self.edge:
             del self.edge[x]
         for y in self.edge.iterkeys():
-            if self.edge[y].has_key(x):
+            if x in self.edge[y]:
                 del self.edge[y][x]
 
     def remove_edge(self, u, v):
-        if self.edge.has_key(u) and self.edge[u].has_key(v):
+        if u in self.edge and v in self.edge[u]:
             del self.edge[u][v]
 
     def remove_edges_from(self, ebunch):
