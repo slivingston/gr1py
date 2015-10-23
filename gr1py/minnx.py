@@ -48,6 +48,9 @@ class DiGraph(object):
         self.node = dict()
         self.edge = dict()
 
+    def number_of_nodes(self):
+        return len(self.node)
+
     def add_node(self, x, attr=None):
         if attr is None:
             self.node[x] = dict()
@@ -56,7 +59,10 @@ class DiGraph(object):
 
     def add_nodes_from(self, nbunch):
         for nodetuple in nbunch:
-            self.add_node(*nodetuple)
+            if isinstance(nodetuple, tuple):
+                self.add_node(*nodetuple)
+            else:
+                self.add_node(nodetuple)
 
     def add_edge(self, x, y, attr=None):
         if x not in self.node:
