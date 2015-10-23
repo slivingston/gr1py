@@ -4,7 +4,17 @@ python:
   - "2.7"
   - "3.4"
 
+env:
+  - USE_NX=0
+  - USE_NX=1
+
+matrix:
+  exclude:
+    - python: "2.6"
+      env: USE_NX=1
+
 install:
+  - if [ ${USE_NX} = 1 ]; then pip install networkx; fi
   - pip install .
 
 script: cd tests && nosetests -v
