@@ -5,8 +5,8 @@ from setuptools import setup
 
 # Version
 MAJOR = 0
-MINOR = 0
-MICRO = 5
+MINOR = 1
+MICRO = 0
 
 gr1py_version = '{major}.{minor}.{micro}'.format(major=MAJOR, minor=MINOR, micro=MICRO)
 
