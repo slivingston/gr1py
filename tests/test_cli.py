@@ -1,5 +1,5 @@
 from __future__ import print_function
-from StringIO import StringIO
+import io
 import sys
 
 import gr1py
@@ -7,7 +7,7 @@ from gr1py import cli
 
 
 def test_version():
-    baitandswitch = StringIO()
+    baitandswitch = io.StringIO()
     stdout_cache = sys.stdout
     sys.stdout = baitandswitch
     assert cli.main(args=['gr1py', '-V']) == 0
