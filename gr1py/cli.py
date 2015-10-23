@@ -45,12 +45,12 @@ def main(args=None):
         args = parser.parse_args(args)
 
     if args.show_version:
-        print('gr1py '+__version__)
+        print(u'gr1py '+__version__)
         return 0
 
     args.output_format = args.output_format.lower()
     if args.output_format not in ['json', 'gr1caut', 'dot']:
-        print('Unrecognized output format, "'+str(args.output_format)+'". Try "-h".')
+        print(u'Unrecognized output format, "'+str(args.output_format)+'". Try "-h".')
         return 1
 
     if args.FILE is None:
@@ -64,15 +64,15 @@ def main(args=None):
 
     if args.check_realizable:
         if check_realizable(tsys, exprtab):
-            print('Realizable.')
+            print(u'Realizable.')
             return 0
         else:
-            print('Not realizable.')
+            print(u'Not realizable.')
             return 3
     else: # Default behavior is to synthesize
         strategy = synthesize(tsys, exprtab)
         if strategy is None:
-            print('Not realizable.')
+            print(u'Not realizable.')
             return 3
         else:
             if args.output_format == 'json':
