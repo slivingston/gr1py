@@ -30,7 +30,7 @@ def main(args=None):
     parser = argparse.ArgumentParser(prog='gr1py')
     parser.add_argument('FILE', nargs='?',
                         help='input specification file; default format of gr1c')
-    parser.add_argument('-V', action='store_true', dest='show_version',
+    parser.add_argument('-V', '--version', action='store_true', dest='show_version',
                         help='print version number and exit')
     parser.add_argument('-r', action='store_true', dest='check_realizable',
                         help='check realizability')
