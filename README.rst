@@ -33,6 +33,28 @@ Current `CI server report <https://travis-ci.org/slivingston/gr1py>`_:
    :alt: build status from Travis CI
 
 
+Examples
+--------
+
+Besides the Python package, a script named ``gr1py`` is installed that provides
+access to several routines from the command-line. Consider the file named
+examples/arbiter3.spc that is included in the source release. To check that the
+specification defined by it can be realized, try ::
+
+  gr1py -r examples/arbiter3.spc
+
+To synthesize a winning strategy and dump it in the Graphviz DOT format, try ::
+
+  gr1py -t dot examples/arbiter3.spc > arbiter3-fsm.dot
+  dot -Tsvg -O arbiter3-fsm.dot
+
+where the second command uses the program ``dot`` (part of Graphviz) to create
+an SVG file, likely named arbiter3-fsm.dot.svg; e.g., the file can be displayed
+using a Web browser or Inkscape.
+
+A summary of command-line usage can be obtained by ``grpy -h``.
+
+
 Input formats
 -------------
 
