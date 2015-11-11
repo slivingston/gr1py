@@ -35,5 +35,10 @@ setup(name='gr1py',
       package_data={'gr1py.form': ['parsetab.py']},
       install_requires=['ply'],
       entry_points={'console_scripts': ['gr1py = gr1py.cli:main']},
-      use_2to3=True
+      use_2to3=True,
+      classifiers=['Programming Language :: Python :: 2',
+                   'Programming Language :: Python :: 2.6',
+                   'Programming Language :: Python :: 2.7',
+                   'Programming Language :: Python :: 3',
+                   'Programming Language :: Python :: 3.4']
       )
