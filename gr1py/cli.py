@@ -76,11 +76,11 @@ def main(args=None):
             return 3
         else:
             if args.output_format == 'json':
-                print(output.dump_json(tsys.symtab, strategy))
+                print(output.dumps_json(tsys.symtab, strategy))
             elif args.output_format == 'gr1caut':
-                print(output.dump_gr1caut(tsys.symtab, strategy))
+                print(output.dumps_gr1caut(tsys.symtab, strategy))
             elif args.output_format == 'dot':
-                print(output.dump_dot(tsys.symtab, strategy))
+                print(output.dumps_dot(tsys.symtab, strategy))
             else:
                 raise ValueError('Unrecognized output format, "'+str(args.output_format)+'"')
                 return 1

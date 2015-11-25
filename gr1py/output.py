@@ -5,7 +5,7 @@ import time
 from . import __version__
 
 
-def dump_json(symtab, strategy):
+def dumps_json(symtab, strategy):
     outs = '{'+('"version": 1,\n'
             ' "gr1py": "{version}",\n'
             ' "date": "{date}",\n'
@@ -42,7 +42,7 @@ def dump_json(symtab, strategy):
 
     return outs+'}}'
 
-def dump_gr1caut(symtab, strategy):
+def dumps_gr1caut(symtab, strategy):
     node_mapping = dict(zip(strategy.nodes_iter(), range(strategy.number_of_nodes())))
     outs = '1\n'  # version 1
     for nd, attr in strategy.nodes_iter(data=True):
@@ -54,7 +54,7 @@ def dump_gr1caut(symtab, strategy):
         outs += '\n'
     return outs
 
-def dump_dot(symtab, strategy):
+def dumps_dot(symtab, strategy):
     idt = 4*' '
     outs = '/* created using gr1py, version {v} */\n'.format(v=__version__)
     outs += 'digraph A {\n'+idt+'"" [shape=none]\n'
