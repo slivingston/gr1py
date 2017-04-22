@@ -1,7 +1,7 @@
 from gr1py.minnx import DiGraph
 
 
-class DiGraph_test:
+class DiGraph_test(object):
     def setUp(self):
         self.G = DiGraph()
 
