@@ -3,4 +3,7 @@ parser.out
 parsetab.py
 *~
 gr1py/_version.py
+build/
+dist/
 gr1py.egg-info/
+*.swp
