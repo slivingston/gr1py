@@ -96,7 +96,7 @@ class DiGraph(object):
         else:
             return self.node.keys()
 
-    def nodes_iter(self, data=False):
+    def nodes(self, data=False):
         if data:
             return self.node.iteritems()
         else:
