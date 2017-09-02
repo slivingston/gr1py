@@ -90,7 +90,7 @@ class DiGraph(object):
         else:
             return False
 
-    def nodes(self, data=False):
+    def nodes_list(self, data=False):
         if data:
             return self.node.items()
         else:
