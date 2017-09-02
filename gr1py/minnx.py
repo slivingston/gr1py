@@ -116,7 +116,7 @@ class DiGraph(object):
     def successors(self, x):
         return self.edge[x].iterkeys()
 
-    def predecessors(self, x):
+    def predecessors_list(self, x):
         return [u for u in self.predecessors_iter(x)]
 
     def predecessors_iter(self, x):
