@@ -53,9 +53,11 @@ class DiGraph(object):
 
     def add_node(self, x, attr=None):
         if attr is None:
-            self.node[x] = dict()
-        else:
+            attr = dict()
+        if x not in self.node:
             self.node[x] = attr
+        else:
+            self.node[x].update(attr)
 
     def add_nodes_from(self, nbunch):
         for nodetuple in nbunch:
