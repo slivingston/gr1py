@@ -67,6 +67,6 @@ def dumps_dot(symtab, strategy):
         outs += idt+node_strings[nd]+'\n'
         if attr['initial']:
             outs += '"" -> '+idt+node_strings[nd]+'\n'
-    for (u, v) in strategy.edges_iter():
+    for (u, v) in strategy.edges():
         outs += idt+node_strings[u]+' -> '+node_strings[v]+'\n'
     return outs+'}'
