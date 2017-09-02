@@ -81,7 +81,7 @@ class DiGraph(object):
                 self.edge[x][y] = attr
         else:
             if attr is not None:
-                self.node[x][y].update(attr)
+                self.edge[x][y].update(attr)
 
     def add_edges_from(self, ebunch):
         for edgetuple in ebunch:
