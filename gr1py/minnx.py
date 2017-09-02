@@ -102,7 +102,7 @@ class DiGraph(object):
         else:
             return self.node.iterkeys()
 
-    def edges_iter(self, data=False):
+    def edges(self, data=False):
         for x, yd in self.edge.iteritems():
             for y in yd.iterkeys():
                 if data:
