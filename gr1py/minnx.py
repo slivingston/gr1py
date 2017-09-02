@@ -128,8 +128,8 @@ class DiGraph(object):
         for u in self.predecessors_iter(x):
             yield (u, x)
 
-    def in_edges(self, x):
-        return [e for e in self.in_edges_iter(x)]
+    def in_edges_list(self, x):
+        return [e for e in self.in_edges(x)]
 
     def remove_node(self, x):
         if x in self.node:
