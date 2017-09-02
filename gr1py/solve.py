@@ -155,14 +155,15 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                     break
             if strategy.node[nd]['mode'] != original_mode:
                 repeat_found = False
-                for possible_repeat, attr in strategy.nodes(data=True):
+                for possible_repeat, attr in list(strategy.nodes(data=True)):
                     if (possible_repeat != nd
                         and attr['mode'] == strategy.node[nd]['mode']
                         and attr['state'] == strategy.node[nd]['state']):
                         repeat_found = True
                         for (u,v) in strategy.in_edges(nd):
                             strategy.add_edge(u, possible_repeat)
-                        strategy.remove_edges_from(strategy.in_edges(nd))
+                        strategy.remove_edges_from(
+                            list(strategy.in_edges(nd)))
                         strategy.remove_node(nd)
                         break
                 if repeat_found:
