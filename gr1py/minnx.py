@@ -67,7 +67,7 @@ class DiGraph(object):
             else:
                 self.add_node(nodetuple)
 
-    def add_edge(self, x, y, attr=None):
+    def add_edge(self, x, y, **attr):
         if x not in self.node:
             self.add_node(x)
         if y not in self.node:
@@ -75,13 +75,9 @@ class DiGraph(object):
         if x not in self.edge:
             self.edge[x] = {y: dict()}
         if y not in self.edge[x]:
-            if attr is None:
-                self.edge[x][y] = dict()
-            else:
-                self.edge[x][y] = attr
+            self.edge[x][y] = attr
         else:
-            if attr is not None:
-                self.edge[x][y].update(attr)
+            self.edge[x][y].update(attr)
 
     def add_edges_from(self, ebunch):
         for edgetuple in ebunch:
