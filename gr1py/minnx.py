@@ -124,7 +124,7 @@ class DiGraph(object):
             if x in yd.iterkeys():
                 yield u
 
-    def in_edges_iter(self, x):
+    def in_edges(self, x):
         for u in self.predecessors_iter(x):
             yield (u, x)
 
