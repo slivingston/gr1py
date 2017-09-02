@@ -54,7 +54,7 @@ def ts_from_expr(symtab, exprtab):
 
     G = DiGraph()
     G.add_edges_from(systrans)
-    for nd in G.nodes_iter():
+    for nd in G.nodes():
         G.node[nd]['sat'] = list()
         stated = dict(zip(identifiers, nd))
         for subformula in ['ENVINIT', 'SYSINIT']:

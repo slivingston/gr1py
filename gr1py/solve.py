@@ -30,7 +30,7 @@ def forallexists_pre(tsys, A):
     return tmp
 
 def get_winning_set(tsys, return_intermediates=False):
-    S = set(tsys.G.nodes_iter())
+    S = set(tsys.G.nodes())
     Z = [S.copy() for i in range(tsys.num_sgoals)]
     change_among_Z = True
     while change_among_Z:
@@ -155,7 +155,7 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                     break
             if strategy.node[nd]['mode'] != original_mode:
                 repeat_found = False
-                for possible_repeat, attr in strategy.nodes_iter(data=True):
+                for possible_repeat, attr in strategy.nodes(data=True):
                     if (possible_repeat != nd
                         and attr['mode'] == strategy.node[nd]['mode']
                         and attr['state'] == strategy.node[nd]['state']):
@@ -204,7 +204,7 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                 assert next_state is not None
 
             foundmatch = False
-            for candidate, cattr in strategy.nodes_iter(data=True):
+            for candidate, cattr in strategy.nodes(data=True):
                 if cattr['state'] == next_state and cattr['mode'] == strategy.node[nd]['mode']:
                     strategy.add_edge(nd, candidate)
                     foundmatch = True

@@ -28,7 +28,7 @@ def dumps_json(symtab, strategy):
                                     if not v['uncontrolled']])+'],\n'
     outs += ' "nodes": {\n'
     first = True
-    for nd, attr in strategy.nodes_iter(data=True):
+    for nd, attr in strategy.nodes(data=True):
         if first:
             first = False
         else:
@@ -43,9 +43,9 @@ def dumps_json(symtab, strategy):
     return outs+'}}'
 
 def dumps_gr1caut(symtab, strategy):
-    node_mapping = dict(zip(strategy.nodes_iter(), range(strategy.number_of_nodes())))
+    node_mapping = dict(zip(strategy.nodes(), range(strategy.number_of_nodes())))
     outs = '1\n'  # version 1
-    for nd, attr in strategy.nodes_iter(data=True):
+    for nd, attr in strategy.nodes(data=True):
         outs += str(node_mapping[nd])+' ' + ' '.join([str(val) for val in attr['state']])
         outs += ' ' + str(1 if attr['initial'] else 0)
         outs += ' ' + str(attr['mode'])
@@ -59,7 +59,7 @@ def dumps_dot(symtab, strategy):
     outs = '/* created using gr1py, version {v} */\n'.format(v=__version__)
     outs += 'digraph A {\n'+idt+'"" [shape=none]\n'
     node_strings = dict()
-    for nd, attr in strategy.nodes_iter(data=True):
+    for nd, attr in strategy.nodes(data=True):
         node_strings[nd] = ('"'+str(nd)+';\\n'
                             +', '.join([sym['name']+'='+str(attr['state'][i])
                                        for (i,sym) in enumerate(symtab)])
