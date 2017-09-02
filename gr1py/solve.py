@@ -14,7 +14,7 @@ from .tstruct import stategen
 def forallexists_pre(tsys, A):
     tmp = set()
     for s in A:
-        for pre_s in tsys.G.predecessors_iter(s):
+        for pre_s in tsys.G.predecessors(s):
             for envpost in tsys.envtrans[pre_s]:
                 canreach = False
                 for post_pre_s in tsys.G.successors(pre_s):

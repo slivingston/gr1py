@@ -117,7 +117,7 @@ class DiGraph(object):
         return self.edge[x].iterkeys()
 
     def predecessors_list(self, x):
-        return [u for u in self.predecessors_iter(x)]
+        return [u for u in self.predecessors(x)]
 
     def predecessors(self, x):
         for u, yd in self.edge.iteritems():
@@ -125,7 +125,7 @@ class DiGraph(object):
                 yield u
 
     def in_edges(self, x):
-        for u in self.predecessors_iter(x):
+        for u in self.predecessors(x):
             yield (u, x)
 
     def in_edges_list(self, x):
