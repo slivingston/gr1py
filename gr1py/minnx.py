@@ -119,7 +119,7 @@ class DiGraph(object):
     def predecessors_list(self, x):
         return [u for u in self.predecessors_iter(x)]
 
-    def predecessors_iter(self, x):
+    def predecessors(self, x):
         for u, yd in self.edge.iteritems():
             if x in yd.iterkeys():
                 yield u
