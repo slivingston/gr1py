@@ -37,7 +37,7 @@ def dumps_json(symtab, strategy):
         for key in ['state', 'mode', 'initial']:
             outs += '\t"'+key+'": '+json.dumps(attr[key])+',\n'
         outs += '\t"trans": '+json.dumps([str(next_nd) for next_nd
-                                          in strategy.successors_iter(nd)])
+                                          in strategy.successors(nd)])
         outs += ' }\n'
 
     return outs+'}}'
