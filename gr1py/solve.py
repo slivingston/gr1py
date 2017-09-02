@@ -216,9 +216,11 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                     new_mode = strategy.node[nd]['mode']
 
                 workset.append(next_id)
-                strategy.add_node(next_id, {'state': next_state,
-                                            'mode': new_mode,
-                                            'initial': False})
+                strategy.add_node(
+                    next_id,
+                    state=next_state,
+                    mode=new_mode,
+                    initial=False)
                 strategy.add_edge(nd, next_id)
                 next_id += 1
 
