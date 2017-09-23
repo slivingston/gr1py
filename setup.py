@@ -37,7 +37,6 @@ setup(name='gr1py',
       entry_points={'console_scripts': ['gr1py = gr1py.cli:main']},
       use_2to3=True,
       classifiers=['Programming Language :: Python :: 2',
-                   'Programming Language :: Python :: 2.6',
                    'Programming Language :: Python :: 2.7',
                    'Programming Language :: Python :: 3',
                    'Programming Language :: Python :: 3.4']
