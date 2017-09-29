@@ -78,11 +78,9 @@ Bug reports, feature requests, and comments can be submitted via the `project
 issue tracker <https://github.com/slivingston/gr1py/issues>`_ or via email to
 the authors.
 
-
-Authors
--------
-
-Scott C. Livingston  <slivingston@cds.caltech.edu>
+Code contributions are welcome. To avoid redundant effort, please check for an
+existing issue or other indication of prior or intended work before starting.
+When ready for review, send a `pull request <https://github.com/slivingston/gr1py/pulls>`_.
 
 
 License
