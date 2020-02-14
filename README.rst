@@ -9,7 +9,7 @@ Installation
 ------------
 
 Releases are available from the `Python Package Index
-<https://pypi.python.org/pypi>`_ at https://pypi.python.org/pypi/gr1py
+<https://pypi.org/>`_ at https://pypi.org/project/gr1py/
 To get it from there and check the version, try ::
 
   pip install gr1py
