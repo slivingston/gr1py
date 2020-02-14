@@ -49,12 +49,12 @@ class DiGraph(object):
         self.edges = dict()
 
     def number_of_nodes(self):
-        return len(self.node)
+        return len(self.nodes)
 
     def add_node(self, x, **attr):
         if attr is None:
             attr = dict()
-        if x not in self.node:
+        if x not in self.nodes:
             self.nodes[x] = attr
         else:
             self.nodes[x].update(attr)
@@ -68,11 +68,11 @@ class DiGraph(object):
                 self.add_node(nodetuple)
 
     def add_edge(self, x, y, **attr):
-        if x not in self.node:
+        if x not in self.nodes:
             self.add_node(x)
-        if y not in self.node:
+        if y not in self.nodes:
             self.add_node(y)
-        if x not in self.edge:
+        if x not in self.edges:
             self.edges[x] = {y: dict()}
         if y not in self.edges[x]:
             self.edges[x][y] = attr
@@ -84,25 +84,25 @@ class DiGraph(object):
             self.add_edge(*edgetuple)
 
     def has_edge(self, x, y):
-        if x in self.edge and y in self.edges[x]:
+        if x in self.edges and y in self.edges[x]:
             return True
         else:
             return False
 
     def nodes_list(self, data=False):
         if data:
-            return self.node.items()
+            return self.nodes.items()
         else:
-            return self.node.keys()
+            return self.nodes.keys()
 
     def nodes(self, data=False):
         if data:
-            return self.node.iteritems()
+            return self.nodes.iteritems()
         else:
-            return self.node.iterkeys()
+            return self.nodes.iterkeys()
 
     def edges(self, data=False):
-        for x, yd in self.edge.iteritems():
+        for x, yd in self.edges.iteritems():
             for y in yd.iterkeys():
                 if data:
                     yield x, y, yd[y]
@@ -119,7 +119,7 @@ class DiGraph(object):
         return [u for u in self.predecessors(x)]
 
     def predecessors(self, x):
-        for u, yd in self.edge.iteritems():
+        for u, yd in self.edges.iteritems():
             if x in yd.iterkeys():
                 yield u
 
@@ -131,16 +131,16 @@ class DiGraph(object):
         return [e for e in self.in_edges(x)]
 
     def remove_node(self, x):
-        if x in self.node:
+        if x in self.nodes:
             del self.nodes[x]
-        if x in self.edge:
+        if x in self.edges:
             del self.edges[x]
-        for y in self.edge.iterkeys():
+        for y in self.edges.iterkeys():
             if x in self.edges[y]:
                 del self.edges[y][x]
 
     def remove_edge(self, u, v):
-        if u in self.edge and v in self.edges[u]:
+        if u in self.edges and v in self.edges[u]:
             del self.edges[u][v]
 
     def remove_edges_from(self, ebunch):
