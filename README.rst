@@ -18,7 +18,7 @@ To get it from there and check the version, try ::
 `pip <https://pip.pypa.io>`_ should get dependencies for you if you do not have
 them. They are
 
-* PLY (http://www.dabeaz.com/ply/)
+* PLY (https://www.dabeaz.com/ply/)
 
 If it is available, NetworkX (https://networkx.github.io/) will be used.
 However, it is not required.  A simple built-in class for directed graphs will
