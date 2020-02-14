@@ -45,8 +45,8 @@ SCL; 22 Oct 2015
 
 class DiGraph(object):
     def __init__(self):
-        self.node = dict()
-        self.edge = dict()
+        self.nodes = dict()
+        self.edges = dict()
 
     def number_of_nodes(self):
         return len(self.node)
@@ -55,9 +55,9 @@ class DiGraph(object):
         if attr is None:
             attr = dict()
         if x not in self.node:
-            self.node[x] = attr
+            self.nodes[x] = attr
         else:
-            self.node[x].update(attr)
+            self.nodes[x].update(attr)
 
     def add_nodes_from(self, nbunch):
         for nodetuple in nbunch:
@@ -73,18 +73,18 @@ class DiGraph(object):
         if y not in self.node:
             self.add_node(y)
         if x not in self.edge:
-            self.edge[x] = {y: dict()}
-        if y not in self.edge[x]:
-            self.edge[x][y] = attr
+            self.edges[x] = {y: dict()}
+        if y not in self.edges[x]:
+            self.edges[x][y] = attr
         else:
-            self.edge[x][y].update(attr)
+            self.edges[x][y].update(attr)
 
     def add_edges_from(self, ebunch):
         for edgetuple in ebunch:
             self.add_edge(*edgetuple)
 
     def has_edge(self, x, y):
-        if x in self.edge and y in self.edge[x]:
+        if x in self.edge and y in self.edges[x]:
             return True
         else:
             return False
@@ -110,10 +110,10 @@ class DiGraph(object):
                     yield x, y
 
     def successors_list(self, x):
-        return self.edge[x].keys()
+        return self.edges[x].keys()
 
     def successors(self, x):
-        return self.edge[x].iterkeys()
+        return self.edges[x].iterkeys()
 
     def predecessors_list(self, x):
         return [u for u in self.predecessors(x)]
@@ -132,16 +132,16 @@ class DiGraph(object):
 
     def remove_node(self, x):
         if x in self.node:
-            del self.node[x]
+            del self.nodes[x]
         if x in self.edge:
-            del self.edge[x]
+            del self.edges[x]
         for y in self.edge.iterkeys():
-            if x in self.edge[y]:
-                del self.edge[y][x]
+            if x in self.edges[y]:
+                del self.edges[y][x]
 
     def remove_edge(self, u, v):
-        if u in self.edge and v in self.edge[u]:
-            del self.edge[u][v]
+        if u in self.edge and v in self.edges[u]:
+            del self.edges[u][v]
 
     def remove_edges_from(self, ebunch):
         for edgetuple in ebunch:

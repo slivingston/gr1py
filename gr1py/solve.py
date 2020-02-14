@@ -45,7 +45,7 @@ def get_winning_set(tsys, return_intermediates=False):
             if return_intermediates:
                 num_sublevels = 0
             goal_progress = forallexists_pre(tsys, Z_prev[(i+1) % tsys.num_sgoals])
-            goal_progress &= set([s for s in S if 'SYSGOAL'+str(i) in tsys.G.node[s]['sat']])
+            goal_progress &= set([s for s in S if 'SYSGOAL'+str(i) in tsys.G.nodes[s]['sat']])
             while True:
                 Y_prev = Y.copy()
                 if return_intermediates:
@@ -61,7 +61,7 @@ def get_winning_set(tsys, return_intermediates=False):
                     while True:
                         X_prev = X.copy()
                         X = forallexists_pre(tsys, X_prev)
-                        X &= set([s for s in S if 'ENVGOAL'+str(j) not in tsys.G.node[s]['sat']])
+                        X &= set([s for s in S if 'ENVGOAL'+str(j) not in tsys.G.nodes[s]['sat']])
                         X |= reach_goal_progress
                         if X == X_prev:
                             break
@@ -104,7 +104,7 @@ def get_initial_states(W, tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
         found_match = False
         for s in W:
             if (tuple([s[i] for i in tsys.ind_uncontrolled]) == state
-                and 'SYSINIT' in tsys.G.node[s]['sat']):
+                and 'SYSINIT' in tsys.G.nodes[s]['sat']):
                 initial_states.append(copy.deepcopy(s))
                 found_match = True
                 break
@@ -131,7 +131,7 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
     goalnames = ['SYSGOAL'+str(i) for i in range(tsys.num_sgoals)]
 
     for goalmode in range(tsys.num_sgoals):
-        Y_list[goalmode][0] = set([s for s in W if goalnames[goalmode] in tsys.G.node[s]['sat']])
+        Y_list[goalmode][0] = set([s for s in W if goalnames[goalmode] in tsys.G.nodes[s]['sat']])
 
     strategy = DiGraph()
     next_id = len(initial_states)
@@ -142,23 +142,23 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
         nd = workset.pop()
 
         j = 0
-        while j < len(Y_list[strategy.node[nd]['mode']]):
-            if strategy.node[nd]['state'] in Y_list[strategy.node[nd]['mode']][j]:
+        while j < len(Y_list[strategy.nodes[nd]['mode']]):
+            if strategy.nodes[nd]['state'] in Y_list[strategy.nodes[nd]['mode']][j]:
                 break
             j += 1
         if j == 0:
-            assert goalnames[strategy.node[nd]['mode']] in tsys.G.node[strategy.node[nd]['state']]['sat']
-            original_mode = strategy.node[nd]['mode']
-            while goalnames[strategy.node[nd]['mode']] in tsys.G.node[strategy.node[nd]['state']]['sat']:
-                strategy.node[nd]['mode'] = (strategy.node[nd]['mode'] + 1) % tsys.num_sgoals
-                if strategy.node[nd]['mode'] == original_mode:
+            assert goalnames[strategy.nodes[nd]['mode']] in tsys.G.nodes[strategy.nodes[nd]['state']]['sat']
+            original_mode = strategy.nodes[nd]['mode']
+            while goalnames[strategy.nodes[nd]['mode']] in tsys.G.nodes[strategy.nodes[nd]['state']]['sat']:
+                strategy.nodes[nd]['mode'] = (strategy.nodes[nd]['mode'] + 1) % tsys.num_sgoals
+                if strategy.nodes[nd]['mode'] == original_mode:
                     break
-            if strategy.node[nd]['mode'] != original_mode:
+            if strategy.nodes[nd]['mode'] != original_mode:
                 repeat_found = False
                 for possible_repeat, attr in list(strategy.nodes(data=True)):
                     if (possible_repeat != nd
-                        and attr['mode'] == strategy.node[nd]['mode']
-                        and attr['state'] == strategy.node[nd]['state']):
+                        and attr['mode'] == strategy.nodes[nd]['mode']
+                        and attr['state'] == strategy.nodes[nd]['state']):
                         repeat_found = True
                         for (u,v) in strategy.in_edges(nd):
                             strategy.add_edge(u, possible_repeat)
@@ -170,18 +170,18 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                     continue
 
             j = 0
-            while j < len(Y_list[strategy.node[nd]['mode']]):
-                if strategy.node[nd]['state'] in Y_list[strategy.node[nd]['mode']][j]:
+            while j < len(Y_list[strategy.nodes[nd]['mode']]):
+                if strategy.nodes[nd]['state'] in Y_list[strategy.nodes[nd]['mode']][j]:
                     break
                 j += 1
             if j == 0:
-                assert goalnames[strategy.node[nd]['mode']] in tsys.G.node[strategy.node[nd]['state']]['sat']
+                assert goalnames[strategy.nodes[nd]['mode']] in tsys.G.nodes[strategy.nodes[nd]['state']]['sat']
 
-        for envpost in tsys.envtrans[strategy.node[nd]['state']]:
+        for envpost in tsys.envtrans[strategy.nodes[nd]['state']]:
             next_state = None
-            for succ_nd in tsys.G.successors(strategy.node[nd]['state']):
+            for succ_nd in tsys.G.successors(strategy.nodes[nd]['state']):
                 if (tuple([succ_nd[i] for i in tsys.ind_uncontrolled]) == envpost
-                    and ((j > 0 and succ_nd in Y_list[strategy.node[nd]['mode']][j-1])
+                    and ((j > 0 and succ_nd in Y_list[strategy.nodes[nd]['mode']][j-1])
                          or (j == 0 and succ_nd in W))):
                     next_state = succ_nd
                     break
@@ -191,13 +191,13 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
                 if j == 0:
                     import pdb; pdb.set_trace()
                 blocking_index = None
-                blocking_sets = X_list[strategy.node[nd]['mode']][j-1]
+                blocking_sets = X_list[strategy.nodes[nd]['mode']][j-1]
                 for k in range(len(blocking_sets)):
-                    if strategy.node[nd]['state'] in blocking_sets[k]:
+                    if strategy.nodes[nd]['state'] in blocking_sets[k]:
                         blocking_index = k
                         break
                 assert blocking_index is not None
-                for succ_nd in tsys.G.successors(strategy.node[nd]['state']):
+                for succ_nd in tsys.G.successors(strategy.nodes[nd]['state']):
                     if (tuple([succ_nd[i] for i in tsys.ind_uncontrolled]) == envpost
                         and succ_nd in blocking_sets[blocking_index]):
                         next_state = succ_nd
@@ -206,15 +206,15 @@ def synthesize(tsys, exprtab, init_flags='ALL_ENV_EXIST_SYS_INIT'):
 
             foundmatch = False
             for candidate, cattr in strategy.nodes(data=True):
-                if cattr['state'] == next_state and cattr['mode'] == strategy.node[nd]['mode']:
+                if cattr['state'] == next_state and cattr['mode'] == strategy.nodes[nd]['mode']:
                     strategy.add_edge(nd, candidate)
                     foundmatch = True
                     break
             if not foundmatch:
                 if j == 0:
-                    new_mode = (strategy.node[nd]['mode'] + 1) % tsys.num_sgoals
+                    new_mode = (strategy.nodes[nd]['mode'] + 1) % tsys.num_sgoals
                 else:
-                    new_mode = strategy.node[nd]['mode']
+                    new_mode = strategy.nodes[nd]['mode']
 
                 workset.append(next_id)
                 strategy.add_node(

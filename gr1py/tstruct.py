@@ -55,15 +55,15 @@ def ts_from_expr(symtab, exprtab):
     G = DiGraph()
     G.add_edges_from(systrans)
     for nd in G.nodes():
-        G.node[nd]['sat'] = list()
+        G.nodes[nd]['sat'] = list()
         stated = dict(zip(identifiers, nd))
         for subformula in ['ENVINIT', 'SYSINIT']:
             if eval(exprtab[subformula], evalglobals, stated):
-                G.node[nd]['sat'].append(subformula)
+                G.nodes[nd]['sat'].append(subformula)
         for subformula in ['ENVGOAL', 'SYSGOAL']:
             for (i, goalexpr) in enumerate(exprtab[subformula]):
                 if eval(goalexpr, evalglobals, stated):
-                    G.node[nd]['sat'].append(subformula+str(i))
+                    G.nodes[nd]['sat'].append(subformula+str(i))
                     
     return AnnTransitionSystem(symtab, G, envtrans,
                                num_egoals=len(exprtab['ENVGOAL']),
