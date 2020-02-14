@@ -43,10 +43,66 @@ SCL; 22 Oct 2015
 """
 
 
-class DiGraph(object):
+class NodesView(object):
     def __init__(self):
         self.nodes = dict()
+
+    def __len__(self):
+        return len(self.nodes)
+
+    def __contains__(self, k):
+        return k in self.nodes
+
+    def __getitem__(self, k):
+        return self.nodes[k]
+
+    def __setitem__(self, k, v):
+        self.nodes[k] = v
+
+    def __delitem__(self, k):
+        del self.nodes[k]
+
+    def __call__(self, data=False):
+        if data:
+            return self.nodes.items()
+        else:
+            return self.nodes.keys()
+
+
+class EdgesView(object):
+    def __init__(self):
         self.edges = dict()
+
+    def __contains__(self, k):
+        return k in self.edges
+
+    def __getitem__(self, k):
+        return self.edges[k]
+
+    def __setitem__(self, k, v):
+        self.edges[k] = v
+
+    def __call__(self, data=False):
+        for x, yd in self.edges.items():
+            for y in yd.keys():
+                if data:
+                    yield x, y, yd[y]
+                else:
+                    yield x, y
+
+    def items(self):
+        for k, v in self.edges.items():
+            yield k, v
+
+    def keys(self):
+        for k in self.edges:
+            yield k
+
+
+class DiGraph(object):
+    def __init__(self):
+        self.nodes = NodesView()
+        self.edges = EdgesView()
 
     def number_of_nodes(self):
         return len(self.nodes)
@@ -95,32 +151,18 @@ class DiGraph(object):
         else:
             return self.nodes.keys()
 
-    def nodes(self, data=False):
-        if data:
-            return self.nodes.iteritems()
-        else:
-            return self.nodes.iterkeys()
-
-    def edges(self, data=False):
-        for x, yd in self.edges.iteritems():
-            for y in yd.iterkeys():
-                if data:
-                    yield x, y, yd[y]
-                else:
-                    yield x, y
-
     def successors_list(self, x):
         return self.edges[x].keys()
 
     def successors(self, x):
-        return self.edges[x].iterkeys()
+        return self.edges[x].keys()
 
     def predecessors_list(self, x):
         return [u for u in self.predecessors(x)]
 
     def predecessors(self, x):
-        for u, yd in self.edges.iteritems():
-            if x in yd.iterkeys():
+        for u, yd in self.edges.items():
+            if x in yd.keys():
                 yield u
 
     def in_edges(self, x):
@@ -135,7 +177,7 @@ class DiGraph(object):
             del self.nodes[x]
         if x in self.edges:
             del self.edges[x]
-        for y in self.edges.iterkeys():
+        for y in self.edges.keys():
             if x in self.edges[y]:
                 del self.edges[y][x]
 
