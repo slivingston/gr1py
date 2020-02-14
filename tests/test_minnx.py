@@ -14,6 +14,8 @@ class DiGraph_test(object):
         assert self.G.number_of_nodes() == 1
         self.G.add_nodes_from(range(10))
         assert self.G.number_of_nodes() == 10
+        self.G.remove_node(0)
+        assert self.G.number_of_nodes() == 9
 
     def test_add_remove_edges(self):
         assert self.G.number_of_nodes() == 0
