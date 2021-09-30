@@ -1,5 +1,6 @@
 import gr1py.cli
 from gr1py.solve import check_realizable
+import pytest
 
 
 ARBITER1_SPC_GR1C = """
@@ -20,12 +21,12 @@ SYSGOAL:
 """
 
 
-def check_check_realizable(tsys, exprtab, expected):
-    assert check_realizable(tsys, exprtab) == expected
-
-def test_check_realizable():
-    for spcstr, expected in [(ARBITER1_SPC_GR1C, True),
-                             ('SYS:x;', True),
-                             ('SYS: x;\nSYSGOAL: []<>False;', False)]:
-        tsys, exprtab = gr1py.cli.loads(spcstr)
-        yield check_check_realizable, tsys, exprtab, expected
+@pytest.mark.parametrize(
+    'spcstr,expected',
+    [(ARBITER1_SPC_GR1C, True),
+     ('SYS:x;', True),
+     ('SYS: x;\nSYSGOAL: []<>False;', False)])
+def test_check_realizable(spcstr, expected):
+    tsys, exprtab = gr1py.cli.loads(spcstr)
+    r = check_realizable(tsys, exprtab)
+    assert r == expected, (spcstr, r, expected)
