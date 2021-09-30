@@ -14,8 +14,9 @@ env:
 install:
   - if [ ${USE_NX} = 1 ]; then pip install networkx; fi
   - pip install .
+  - pip install pytest
 
-script: cd tests && nosetests -v
+script: cd tests && pytest -v
 
 notifications:
   email: false
