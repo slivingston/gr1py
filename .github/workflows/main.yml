@@ -1,0 +1,38 @@
+---
+# configuration for GitHub Actions
+name: gr1py tests
+on:
+    push:
+    pull_request:
+    schedule:
+        # the start of every hour is a high-load time for GitHub Actions
+        # https://docs.github.com/en/actions/reference/
+        #     events-that-trigger-workflows#scheduled-events
+        - cron: '37 5 5 * *'
+jobs:
+    build:
+        name: Build
+        runs-on: ubuntu-20.04
+        strategy:
+            matrix:
+                python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9]
+                use-networkx: [0, 1]
+        steps:
+            - uses: actions/checkout@v2
+            - name: Prepare Python ${{ matrix.python-version }}
+                uses: actions/setup-python@v2
+                with:
+                    python-version: ${{ matrix.python-version }}
+            - name: Install test dependencies
+              run: |
+                pip install pytest
+            - name: Install dependencies
+              env:
+                  USE_NX: ${{ matrix.use-networkx }}
+              run: |
+                if [ ${USE_NX} = 1 ]; then pip install networkx; f
+                pip install .
+            - name: Run tests
+              run: |
+                cd tests
+                pytest -v
