@@ -27,10 +27,10 @@ be used if NetworkX is not found.
 If you want to hack on gr1py, clone the repository from
 https://github.com/slivingston/gr1py.git
 
-Current `CI server report <https://travis-ci.org/slivingston/gr1py>`_:
+Current `CI server report <https://github.com/slivingston/gr1py/actions/workflows/main.yml>`_:
 
-.. image:: https://travis-ci.org/slivingston/gr1py.svg?branch=master
-   :alt: build status from Travis CI
+.. image:: https://github.com/slivingston/gr1py/actions/workflows/main.yml/badge.svg
+   :alt: build status from GitHub Actions
 
 
 Examples
