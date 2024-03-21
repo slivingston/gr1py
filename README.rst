@@ -68,7 +68,7 @@ These are selected from the command-line using the ``-t`` switch.  Each
 corresponds to a function in ``gr1py.output``.
 
 * ``json`` : `gr1c JSON <https://tulip-control.github.io/gr1c/md_formats.html#gr1cjson>`_
-* ``dot`` : `Graphviz dot <http://www.graphviz.org>`_
+* ``dot`` : `Graphviz dot <https://www.graphviz.org>`_
 
 
 Feedback and contributing
