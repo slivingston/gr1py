@@ -2,7 +2,7 @@
 
 gr1c can be found at http://scottman.net/2012/gr1c
 A description of the input format is available at
-http://slivingston.github.io/gr1c/md_spc_format.html
+https://tulip-control.github.io/gr1c/md_spc_format.html
 """
 
 tokens = (
