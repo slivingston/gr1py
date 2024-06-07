@@ -7,10 +7,10 @@ on:
 jobs:
     build:
         name: Build
-        runs-on: ubuntu-20.04
+        runs-on: ubuntu-22.04
         strategy:
             matrix:
-                python-version: [3.5, 3.6, 3.7, 3.8, 3.9, '3.10', 3.11]
+                python-version: [3.8, 3.9, '3.10', 3.11, 3.12]
                 use-networkx: [0, 1]
         steps:
             - uses: actions/checkout@v2
