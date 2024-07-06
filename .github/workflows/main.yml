@@ -6,14 +6,14 @@ on:
     pull_request:
 jobs:
     build:
-        name: Build
+        name: Build and test
         runs-on: ubuntu-22.04
         strategy:
             matrix:
                 python-version: [3.8, 3.9, '3.10', 3.11, 3.12]
                 use-networkx: [0, 1]
         steps:
-            - uses: actions/checkout@v2
+            - uses: actions/checkout@v4
             - name: Prepare Python ${{ matrix.python-version }}
               uses: actions/setup-python@v2
               with:
