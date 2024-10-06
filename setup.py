@@ -24,27 +24,4 @@ except ImportError:
     print('Please run again to cache the parsing table.')
     print('!'*60)
 
-setup(name='gr1py',
-      version=gr1py_version,
-      author='Scott C. Livingston',
-      author_email='slivingston@cds.caltech.edu',
-      url='https://github.com/slivingston/gr1py',
-      license='BSD',
-      description='enumerative (or concrete) reactive synthesis tool for the GR(1) fragment of LTL',
-      long_description=open('README.rst').read(),
-      packages=['gr1py', 'gr1py.form'],
-      package_data={'gr1py.form': ['parsetab.py']},
-      install_requires=['ply'],
-      entry_points={'console_scripts': ['gr1py = gr1py.cli:main']},
-      classifiers=['Programming Language :: Python :: 2',
-                   'Programming Language :: Python :: 2.7',
-                   'Programming Language :: Python :: 3',
-                   'Programming Language :: Python :: 3.5',
-                   'Programming Language :: Python :: 3.6',
-                   'Programming Language :: Python :: 3.7',
-                   'Programming Language :: Python :: 3.8',
-                   'Programming Language :: Python :: 3.9',
-                   'Programming Language :: Python :: 3.10',
-                   'Programming Language :: Python :: 3.11',
-                   'Programming Language :: Python :: 3.12']
-      )
+setup(version=gr1py_version)

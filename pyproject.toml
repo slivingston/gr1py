@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gr1py"
+description = "enumerative (or concrete) reactive synthesis tool for the GR(1) fragment of LTL"
+authors = [{name = "Scott C. Livingston", email = "slivingston@cds.caltech.edu"}]
+readme = "README.rst"
+license = {text = "BSD-3-Clause"}
+classifiers = [
+    "License :: OSI Approved :: BSD License",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Software Development",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 2.7",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dynamic = ["version"]
+requires-python = ">=2.7"
+dependencies = [
+    "ply",
+]
+
+[project.urls]
+source = "https://github.com/slivingston/gr1py"
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+]
+
+[tool.setuptools]
+packages = [
+    "gr1py",
+    "gr1py.form",
+]
+
+[tool.setuptools.package-data]
+"gr1py.form" = ["parsetab.py"]
+
+[project.scripts]
+gr1py = "gr1py.cli:main"
