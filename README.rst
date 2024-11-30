@@ -20,7 +20,7 @@ them. They are
 
 * PLY (https://www.dabeaz.com/ply/)
 
-If it is available, NetworkX (https://networkx.github.io/) will be used.
+If it is available, NetworkX (https://networkx.org/) will be used.
 However, it is not required.  A simple built-in class for directed graphs will
 be used if NetworkX is not found.
 
