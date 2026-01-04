@@ -7,9 +7,8 @@ name = "gr1py"
 description = "enumerative (or concrete) reactive synthesis tool for the GR(1) fragment of LTL"
 authors = [{name = "Scott C. Livingston", email = "slivingston@cds.caltech.edu"}]
 readme = "README.rst"
-license = {text = "BSD-3-Clause"}
+license = "BSD-3-Clause"
 classifiers = [
-    "License :: OSI Approved :: BSD License",
     "Intended Audience :: Developers",
     "Intended Audience :: Science/Research",
     "Topic :: Scientific/Engineering",
